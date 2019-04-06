@@ -5,26 +5,26 @@ import {
   Column,
   ManyToOne,
   JoinTable,
-} from 'typeorm';
+} from 'typeorm'
 
-import { UserEntity } from '../user/user.entity';
-import { IdeaEntity } from '../idea/idea.entity';
+import { UserEntity } from '../user/user.entity'
+import { IdeaEntity } from '../idea/idea.entity'
 
 @Entity('comment')
 export class CommentEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @CreateDateColumn()
-  created: Date;
+  created: Date
 
   @Column('text')
-  comment: String;
+  comment: String
 
   @ManyToOne(type => UserEntity)
   @JoinTable()
-  author: UserEntity;
+  author: UserEntity
 
   @ManyToOne(type => IdeaEntity, idea => idea.comments)
-  idea: IdeaEntity;
+  idea: IdeaEntity
 }

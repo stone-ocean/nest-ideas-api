@@ -8,39 +8,39 @@ import {
   ManyToMany,
   JoinTable,
   OneToMany,
-} from 'typeorm';
+} from 'typeorm'
 
-import { UserEntity } from '../user/user.entity';
-import { CommentEntity } from '../comment/comment.entity';
+import { UserEntity } from '../user/user.entity'
+import { CommentEntity } from '../comment/comment.entity'
 
 @Entity('idea')
 export class IdeaEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @CreateDateColumn()
-  created: Date;
+  created: Date
 
   @UpdateDateColumn()
-  updated: Date;
+  updated: Date
 
   @Column('text')
-  idea: string;
+  idea: string
 
   @Column('text')
-  description: string;
+  description: string
 
   @ManyToOne(type => UserEntity, author => author.ideas)
-  author: UserEntity;
+  author: UserEntity
 
   @ManyToMany(type => UserEntity, { cascade: true })
   @JoinTable()
-  upvotes: UserEntity[];
+  upvotes: UserEntity[]
 
   @ManyToMany(type => UserEntity, { cascade: true })
   @JoinTable()
-  downvotes: UserEntity[];
+  downvotes: UserEntity[]
 
   @OneToMany(type => CommentEntity, comment => comment.idea, { cascade: true })
-  comments: CommentEntity[];
+  comments: CommentEntity[]
 }

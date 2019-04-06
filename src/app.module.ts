@@ -1,11 +1,11 @@
-import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from '@nestjs/common'
+import { GraphQLModule } from '@nestjs/graphql'
+import { TypeOrmModule } from '@nestjs/typeorm'
 
-import { ApiModule } from './api.module';
-import { AppController } from './app.controller';
-import { AppGateway } from './app.gateway';
-import { DateScalar } from 'shared/date.scalar';
+import { ApiModule } from './api.module'
+import { AppController } from './app.controller'
+import { AppGateway } from './app.gateway'
+import { DateScalar } from 'shared/date.scalar'
 
 @Module({
   imports: [

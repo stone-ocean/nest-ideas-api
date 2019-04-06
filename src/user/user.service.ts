@@ -1,9 +1,9 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
 
-import { UserEntity } from './user.entity';
-import { UserDTO } from './user.dto';
+import { UserEntity } from './user.entity'
+import { UserDTO } from './user.dto'
 
 @Injectable()
 export class UserService {
@@ -17,38 +17,38 @@ export class UserService {
       relations: ['ideas', 'bookmarks'],
       take: 25,
       skip: 25 * (page - 1),
-    });
-    return users.map(user => user.toResponseObject(false));
+    })
+    return users.map(user => user.toResponseObject(false))
   }
 
   async read(username: string) {
     const user = await this.userRepository.findOne({
       where: { username },
       relations: ['ideas', 'bookmarks'],
-    });
-    return user.toResponseObject(false);
+    })
+    return user.toResponseObject(false)
   }
 
   async login(data: UserDTO) {
-    const { username, password } = data;
-    const user = await this.userRepository.findOne({ where: { username } });
+    const { username, password } = data
+    const user = await this.userRepository.findOne({ where: { username } })
     if (!user || !(await user.comparePassword(password))) {
       throw new HttpException(
         'Invalid username/password',
         HttpStatus.BAD_REQUEST,
-      );
+      )
     }
-    return user.toResponseObject();
+    return user.toResponseObject()
   }
 
   async register(data: UserDTO) {
-    const { username } = data;
-    let user = await this.userRepository.findOne({ where: { username } });
+    const { username } = data
+    let user = await this.userRepository.findOne({ where: { username } })
     if (user) {
-      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST)
     }
-    user = await this.userRepository.create(data);
-    await this.userRepository.save(user);
-    return user.toResponseObject();
+    user = await this.userRepository.create(data)
+    await this.userRepository.save(user)
+    return user.toResponseObject()
   }
 }

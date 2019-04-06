@@ -2,11 +2,11 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
+import { AppGateway } from '../app.gateway'
 import { UserEntity } from '../user/user.entity'
 import { Votes } from '../shared/votes.enum'
 import { IdeaEntity } from './idea.entity'
 import { IdeaDTO, IdeaRO } from './idea.dto'
-import { AppGateway } from 'app.gateway'
 
 @Injectable()
 export class IdeaService {
